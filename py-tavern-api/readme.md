@@ -1,31 +1,35 @@
 # Getting Started
+**If you use PyCharm:**
+
 - clone repo
 
-- create new project [using PyCharm] 
-
-- set up virtualenvironment [using PyCharm] 
-
-- Install dependancies
+- Install dependencies
 
   ```
   pip freeze > requirements.txt
   ```
 
-  
+-   in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
+-   make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
 
-- if you start your own project :
 
-  -   install pytest via PyCharm]
-  -   install tavern [via PyCharm]
-  -   install colorlog [via PyCharm]
 
-- in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
+**If you start your own project  and use PyCharm:**
 
-- make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+- create new project [using PyCharm] 
+
+- set up virtualenvironment [using PyCharm] 
+
+-   install pytest via PyCharm]
+-   install tavern [via PyCharm]
+-   install colorlog [via PyCharm]
+
+-   in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
+-   make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
 
 # Tavern Docs
 
-[Tavern Docs](#https://tavern.readthedocs.io/en/latest/basics.html)
+Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/basics.html)
 
 
 
@@ -68,7 +72,7 @@
 
 # Adding folder to PYTHONPATH
 
-To make sure that Tavern can find external functions you need to make sure that it is in the Python path. For example, if utils.py is in the ‘tests’ folder:
+To make sure that Tavern can find **external functions** you need to make sure that it is in the Python path. For example, if **utils.py** is in the ‘tests’ folder:
 
 **Incorrect:**
 
@@ -92,6 +96,20 @@ zsh: bad substitution
 ```
  PYTHONPATH=$PYTHONPATH:./tests pytest tests/test_basics.tavern.yaml -q -k ex04
 ```
+
+
+
+You can modify  ~/.bash_profile  to add absolute path to your PYTHONPATH. For Example:
+
+```
+export PYTHONPATH="$PYTHONPATH:/Users/maksim/repos/tau-tools-demo/py-tavern-api/tests"
+# save and exit
+# then run in shell or in PyCharm terminal:
+source ~/.bashprofile
+
+```
+
+
 
 
 
