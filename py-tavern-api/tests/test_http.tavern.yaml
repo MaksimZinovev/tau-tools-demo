@@ -1,0 +1,66 @@
+# Public API https://reqres.in/
+
+
+---
+# Simple request and validate status code
+test_name: Reqres ex01
+
+stages:
+  - name: Authenticate check that HTTP status code equals 200
+    request:
+      url: https://api.dropboxapi.com/2/users/get_current_account
+      method: POST
+      headers:
+        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+
+    response:
+      status_code: 200
+
+---
+# Simple request and validate status code
+test_name: Reqres ex01
+
+stages:
+  - name: Authenticate check that HTTP status code equals 200
+    request:
+      url: https://api.dropboxapi.com/2/users/get_current_account
+      method: POST
+      headers:
+        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+
+    response:
+      status_code: 200
+
+---
+# Simple request and validate status code
+test_name: Reqres ex01
+
+stages:
+  - name: Authenticate check that HTTP status code equals 200
+    request:
+      url: https://api.dropboxapi.com/2/check/user
+      method: GET
+      headers:
+        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+        Content-Type: application/json
+      data:
+
+
+    response:
+      status_code: 200
+
+  - name: Authenticate check that HTTP status code equals 200
+    request:
+      url: https://content.dropboxapi.com/2/cloud_docs/get_content
+      method: POST
+      headers:
+        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+        Dropbox-API-Arg:
+          file_id:
+
+
+
+
+
+    response:
+      status_code: 200
