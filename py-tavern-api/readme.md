@@ -1,4 +1,9 @@
+# About
+
+Tavern test examples. Might be helpful if you just started to learn  API testing using Python and Tavern. All tests use free public APIs. 
+
 # Getting Started
+
 **If you use PyCharm:**
 
 - clone repo
@@ -26,6 +31,8 @@
 
 -   in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
 -   make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+
+
 
 # Tavern Docs
 
@@ -68,8 +75,6 @@ Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/ba
 
 
 
-
-
 # Adding folder to PYTHONPATH
 
 To make sure that Tavern can find **external functions** you need to make sure that it is in the Python path. For example, if **utils.py** is in the ‘tests’ folder:
@@ -108,8 +113,6 @@ export PYTHONPATH="$PYTHONPATH:/Users/maksim/repos/tau-tools-demo/py-tavern-api/
 source ~/.bashprofile
 
 ```
-
-
 
 
 
@@ -175,3 +178,6 @@ log_level = INFO
 log_cli_level = INFO
 ```
 
+
+
+![video demo](tavern-demo.gif)

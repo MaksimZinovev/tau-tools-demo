@@ -733,7 +733,7 @@ marks:
   - parametrize:
       key: userid
       vals:
-        - 2078
+#        - 2078
         - 2079
         - 2080
 #        - "{user_id}" # this raises error E   tavern.util.exceptions.MissingFormatError: Tried to use mark 'parametrize' (with value '{'key': 'userid',
