@@ -1,66 +1,105 @@
-# Public API https://reqres.in/
 
 
 ---
 # Simple request and validate status code
-test_name: Reqres ex01
+test_name: Authenticate and get current Dropbox account info ex01
 
 stages:
-  - name: Authenticate check that HTTP status code equals 200
+  - name: Authenticate and check that HTTP status code equals 200
     request:
       url: https://api.dropboxapi.com/2/users/get_current_account
       method: POST
       headers:
-        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+        Authorization: "Bearer {app_token}"
 
     response:
       status_code: 200
+      json:
+        account_id: !anystr
+        name:
+          display_name: !anystr
 
 ---
 # Simple request and validate status code
-test_name: Reqres ex01
+
+
+test_name: Get the contents of Dropbox root folder ex02
 
 stages:
-  - name: Authenticate check that HTTP status code equals 200
+  - name: Authenticate and get the contents of Dropbox root folder
     request:
-      url: https://api.dropboxapi.com/2/users/get_current_account
+      url: https://api.dropboxapi.com/2/files/list_folder
       method: POST
       headers:
-        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
-
-    response:
-      status_code: 200
-
----
-# Simple request and validate status code
-test_name: Reqres ex01
-
-stages:
-  - name: Authenticate check that HTTP status code equals 200
-    request:
-      url: https://api.dropboxapi.com/2/check/user
-      method: GET
-      headers:
-        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+        Authorization: "Bearer {app_token}"
         Content-Type: application/json
-      data:
-
+      json:
+        path: ""
+        recursive: false
+        include_media_info: false
+        include_deleted: false
+        include_has_explicit_shared_members: false
+        include_mounted_folders: true
+        include_non_downloadable_files: true
 
     response:
       status_code: 200
+      json:
+        entries: !anylist
 
-  - name: Authenticate check that HTTP status code equals 200
+
+---
+# TODO: Unable to upload file
+# Errors:
+# E   tavern.util.exceptions.RestRequestException
+# dropbox docs: https://www.dropbox.com/developers/documentation/http/documentation#files-upload
+
+# file upload works if I use REST API console, please see details below the test
+
+test_name: Upload file to Dropbox  folder ex03
+
+stages:
+  - name: Upload file to Dropbox folder
     request:
-      url: https://content.dropboxapi.com/2/cloud_docs/get_content
+      url: https://content.dropboxapi.com/2/files/upload
       method: POST
+      files:
+        test_file: "requirements.txt"
       headers:
-        Authorization: Bearer RnS7t6brnSIAAAAAAAAQDvQSkENjQJ72tT76CNH7_cbZZWOL5CzIfCgUAXD7yg3C
+        Authorization: "Bearer {app_token}"
+        Content-Type: application/octet-stream
         Dropbox-API-Arg:
-          file_id:
-
-
-
-
+          path: "/new/requirements.txt"
+          mode: add
+          autorename: true
+          mute: false
+          strict_conflict: false
 
     response:
       status_code: 200
+
+
+#      POST /2/files/upload HTTP/1.1
+#      Authorization: Bearer F7qMlTV26XAAAAAAAAAAC4FGeBYMdWvN7yk_aPy3cACTCGWx80z6uNJstbEhFwo9
+#      Dropbox-API-Arg: {       "path": "/new/requirements.txt",       "mode": "add",       "autorename": true,       "mute": false,       "strict_conflict": false     }
+#      Content-Length: 462
+#      Content-Type: application/octet-stream
+#      Host: content.dropboxapi.com
+#      [message-body; type: "text/plain", size: 462 bytes]
+#
+#      HTTP/1.1 200 OK
+#      Server: nginx
+#      Date: Sun, 10 May 2020 09:20:34 GMT
+#      Content-Type: application/json
+#      Transfer-Encoding: chunked
+#      Connection: keep-alive
+#      Vary: Accept-Encoding
+#      cache-control: no-cache
+#      pragma: no-cache
+#      access-control-expose-headers: Accept-Ranges, Content-Range, ETag, Dropbox-API-Result
+#      access-control-allow-origin: *
+#      X-Server-Response-Time: 652
+#      X-Dropbox-Request-Id: 8f735623ee37b023084261ed1d79d6d2
+#      X-Robots-Tag: noindex, nofollow, noimageindex
+#      Content-Encoding: gzip
+#      {"name": "requirements.txt", "path_lower": "/new/requirements.txt", "path_display": "/new/requirements.txt", "id": "id:30WfbWTpWgAAAAAAAAAAEQ", "client_modified": "2020-05-10T09:20:34Z", "server_modified": "2020-05-10T09:20:34Z", "rev": "015a547be1d60d000000001c6fb7560", "size": 462, "is_downloadable": true, "content_hash": "3969b8322e824ca55b0656d9015f3b210fec9151431725dacb35d7f4206453ff"}

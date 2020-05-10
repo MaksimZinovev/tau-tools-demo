@@ -178,6 +178,20 @@ log_level = INFO
 log_cli_level = INFO
 ```
 
+# List of Public APIs for Testing
 
+-  https://reqres.in/
+
+- http://api.zippopotam.us/
+
+- https://jsonplaceholder.typicode.com
+
+- https://gorest.co.in/
+
+- http://www.recipepuppy.com
+
+  
+
+ 
 
 ![video demo](tavern-demo.gif)
