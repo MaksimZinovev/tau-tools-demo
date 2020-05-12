@@ -55,6 +55,7 @@ stages:
 # dropbox docs: https://www.dropbox.com/developers/documentation/http/documentation#files-upload
 
 # file upload works if I use Talend API Tester Chrome Extension, please see details below the test
+#https://www.dropbox.com/developers/documentation/http/overview
 
 test_name: Upload file to Dropbox  folder ex03
 

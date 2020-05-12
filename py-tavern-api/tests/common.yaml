@@ -21,7 +21,7 @@ variables:
 #  https://www.dropbox.com/developers/apps > create app > Dropbox API > Full dropbox >
 #  > appname > create app >
 
-  app_token: F7qMlTV26XAAAAAAAAAAC4FGeBYMdWvN7yk_aPy3cACTCGWx80z6uNJstbEhFwo9
+  app_token: F7qMlTV26XAAAAAAAAAAEi3FnEyAxuaXYX4GAqxj2XqbamcHwG4lSVhURTpr5bb9
 
 #name: Adding new random user
 #description: Reusable test step for adding new random user.
