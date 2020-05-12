@@ -129,3 +129,6 @@ dmypy.json
 # macOS
 .idea
 .DS_Store
+
+# local
+secret.yaml

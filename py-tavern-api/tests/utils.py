@@ -25,8 +25,7 @@ def generate_req1():
     "i": "avocado",
     "q": "kale",
     "p": 1,
-
-  }
+        }
 
     return Box(req)
 

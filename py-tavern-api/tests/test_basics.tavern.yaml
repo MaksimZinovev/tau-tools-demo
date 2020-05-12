@@ -240,18 +240,11 @@ stages:
   - name: Injecting external data into a request
 
     request:
-      url: http://www.recipepuppy.com/api/?i=avocado&q=kale&p=1
-# TODO How to inject the following data into a request using external function and url: http://www.recipepuppy.com/api/?
-#      req = {
-#      "i": "avocado",
-#      "q": "kale",
-#      "p": 1,
-#
-#  }
+      url: http://www.recipepuppy.com/api/
       method: GET
-#      json:generate_req1
-#        $ext:
-#          function: utils:generate_req1
+      json:
+        $ext:
+          function: utils:generate_req1
 
     response:
       status_code: 200
@@ -259,8 +252,8 @@ stages:
         title: Recipe Puppy
         version:  0.1
         results:
-          - title: "A Ok Salad Recipe"
-            ingredients: "cayenne, lemon, avocado, kale, sea salt, tomato"
+          - title: "Ginger Champagne"
+            ingredients: "champagne, ginger, ice, vodka"
 
 ---
 
@@ -273,14 +266,12 @@ stages:
   - name: Validate status code 200
 
     request:
-      url: http://www.recipepuppy.com/api/?i=avocado&q=kale&p=1
+      url: http://www.recipepuppy.com/api/
       method: GET
-
-# TODO How to parse the same request using json and url without parameters http://www.recipepuppy.com/api/?
-#      json:
-#        i: avocado
-#        q: kale
-#        p: 1
+      json:
+        i: avocado
+        q: kale
+        p: 1
 
     response:
       json:
@@ -294,10 +285,15 @@ stages:
   - name: Validate saved  data
 
     request:
-      url: http://www.recipepuppy.com/api/?i=avocado&q=kale&p=1
+      url: http://www.recipepuppy.com/api/
       method: GET
+      json:
+        i: avocado
+        q: kale
+        p: 1
 
     response:
+      status_code: 200
       json:
         results:
           - title: "{test_title}"
