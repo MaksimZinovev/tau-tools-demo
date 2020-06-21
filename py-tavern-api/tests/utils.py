@@ -12,6 +12,13 @@ def get_id(response):
     assert response.json().get("id") == 1
     assert response.json().get("userId") == 1
 
+def demo_extra_kwargs(response, arg1, arg2):
+    # Make sure that arg1 received
+
+    logging.info(f'\nArg1: {arg1}')
+    logging.info(f'\nArg2: {arg2}')
+
+
 
 def get_userid(response):
     # Make sure that  id=1 in the response

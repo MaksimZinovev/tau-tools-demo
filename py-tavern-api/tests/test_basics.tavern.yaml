@@ -1,5 +1,6 @@
-#API https://github.com/15Dkatz/official_joke_api
-#source https://www.ontestautomation.com/writing-api-tests-in-python-with-tavern/
+# template: pytest tests/test_basics.tavern.yaml -k ex04
+# API https://github.com/15Dkatz/official_joke_api
+# source https://www.ontestautomation.com/writing-api-tests-in-python-with-tavern/
 
 ---
 # Simple request and validate status code
@@ -97,6 +98,25 @@ stages:
         function: utils:get_id
 
 ---
+
+test_name: Using external function with extra arguments to validate response ex04a
+stages:
+  - name: Make sure we have the right ID
+    request:
+      url: https://jsonplaceholder.typicode.com/posts/1
+      method: GET
+
+    response:
+      status_code: 200
+      verify_response_with:
+        function: utils:demo_extra_kwargs
+        extra_kwargs:
+          arg1: "hello"
+          arg2: "world"
+
+
+---
+
 
 # Using built-in validators
 # See documentation here https://pykwalify.readthedocs.io/en/unstable/validation-rules.html#mapping
@@ -258,7 +278,6 @@ stages:
 ---
 
 # Saving data from response using external functions
-
 # Run: PYTHONPATH=$PYTHONPATH:/tests  pytest tests/test_basics.tavern.yaml -q -k ex011
 
 test_name: Saving data from response using external functions ex11

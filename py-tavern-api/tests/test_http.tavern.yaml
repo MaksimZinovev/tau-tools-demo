@@ -2,7 +2,7 @@
 
 ---
 # Simple request and validate status code
-test_name: Authenticate and get current Dropbox account info ex01
+ test_name: Authenticate and get current Dropbox account info ex01
 
 stages:
   - name: Authenticate and check that HTTP status code equals 200
@@ -17,7 +17,7 @@ stages:
       json:
         account_id: !anystr
         name:
-          display_name: !anystr
+          display_name: anystr
 
 ---
 # Simple request and validate status code
@@ -31,6 +31,7 @@ stages:
       url: https://api.dropboxapi.com/2/files/list_folder
       method: POST
       headers:
+
         Authorization: "Bearer {app_token}"
         Content-Type: application/json
       json:
@@ -48,40 +49,46 @@ stages:
         entries: !anylist
 
 
----
-# TODO: Unable to upload file
-# Errors:
-# E   tavern.util.exceptions.RestRequestException
-# dropbox docs: https://www.dropbox.com/developers/documentation/http/documentation#files-upload
-
-# file upload works if I use Talend API Tester Chrome Extension, please see details below the test
-#https://www.dropbox.com/developers/documentation/http/overview
-
-test_name: Upload file to Dropbox  folder ex03
-
-stages:
-  - name: Upload file to Dropbox folder
-    request:
-      url: https://content.dropboxapi.com/2/files/upload
-      method: POST
-      files:
-        test_file: "requirements.txt"
-      headers:
-        Authorization: "Bearer {app_token}"
-        Content-Type: application/octet-stream
-        Dropbox-API-Arg:
-          path: "/new/requirements.txt"
-          mode: add
-          autorename: true
-          mute: false
-          strict_conflict: false
-
-    response:
-      status_code: 200
+#---
+## TODO: Unable to upload file
+## Errors:
+## E   tavern.util.exceptions.RestRequestException
+## dropbox docs: https://www.dropbox.com/developers/documentation/http/documentation#files-upload
+##
+## file upload works if I use Talend API Tester Chrome Extension, please see details below the test
+##https://www.dropbox.com/developers/documentation/http/overview
+##
+## tavern docs reference
+## https://tavern.readthedocs.io/en/latest/http.html#uploading-files-as-part-of-the-request
+#
+#test_name: Upload file to Dropbox  folder ex03
+#
+#stages:
+#  - name: Upload file to Dropbox folder
+#    request:
+#      url: https://content.dropboxapi.com/2/files/upload
+#      method: POST
+#      files:
+#        test_file: "requirements.txt"
+#      headers:
+#        Authorization: "Bearer {app_token}"
+#        Content-Type: application/octet-stream
+##        Dropbox-API-Arg: '{"path": "/new/requirements.txt","mode": "add",    "autorename": true, "mute": false,"strict_conflict": false}'
+#        Dropbox-API-Arg:
+#          json:
+#            path: "/new/requirements.txt"
+#            mode: add
+#            autorename: true
+#            mute: false
+#            strict_conflict: false
+#
+#
+#    response:
+#      status_code: 200
 
 
 #      POST /2/files/upload HTTP/1.1
-#      Authorization: Bearer F7qMlTV26XAAAAAAAAAAC4FGeBYMdWvN7yk_aPy3cACTCGWx80z6uNJstbEhFwo9
+#      Authorization: Bearer  xxxx
 #      Dropbox-API-Arg: {       "path": "/new/requirements.txt",       "mode": "add",       "autorename": true,       "mute": false,       "strict_conflict": false     }
 #      Content-Length: 462
 #      Content-Type: application/octet-stream
@@ -104,3 +111,21 @@ stages:
 #      X-Robots-Tag: noindex, nofollow, noimageindex
 #      Content-Encoding: gzip
 #      {"name": "requirements.txt", "path_lower": "/new/requirements.txt", "path_display": "/new/requirements.txt", "id": "id:30WfbWTpWgAAAAAAAAAAEQ", "client_modified": "2020-05-10T09:20:34Z", "server_modified": "2020-05-10T09:20:34Z", "rev": "015a547be1d60d000000001c6fb7560", "size": 462, "is_downloadable": true, "content_hash": "3969b8322e824ca55b0656d9015f3b210fec9151431725dacb35d7f4206453ff"}
+
+---
+test_name: Upload file to Dropbox  folder ex04
+
+stages:
+  - name: Upload file to Dropbox folder
+    request:
+      url: https://content.dropboxapi.com/2/files/upload
+      method: POST
+      files:
+        test_file: "requirements.txt"
+      headers:
+        Authorization: "Bearer {app_token}"
+        Content-Type: application/octet-stream
+        Dropbox-API-Arg: "{api-arg}"
+
+    response:
+      status_code: 200

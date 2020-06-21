@@ -21,7 +21,8 @@ variables:
 #  https://www.dropbox.com/developers/apps > create app > Dropbox API > Full dropbox >
 #  > appname > create app >
 
-  app_token: xx
+  app_token: F7qMlTV26XAAAAAAAAAALsvLaX31k-c6ean7HHK4hAsxloIZLGQxBiYR--Yxr3BD
+  api-arg: !raw '{"path": "/new/requirements.txt", "mode": "add","autorename": true, "mute": false, "strict_conflict": false}'
 
 #name: Adding new random user
 #description: Reusable test step for adding new random user.

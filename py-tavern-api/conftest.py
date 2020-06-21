@@ -34,7 +34,7 @@ def zipcode():
 
 
 def pytest_tavern_beta_after_every_response(expected, response):
-    logging.info(f"================= GOT RESPONSE ================== \n\n{dumps(response.json(), indent=4)}")
+    # logging.info(f"================= GOT RESPONSE ================== \n\n{dumps(response.json(), indent=4)}")
     pass
 
 

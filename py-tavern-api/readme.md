@@ -11,7 +11,7 @@ Tavern test examples. Might be helpful if you just started to learn  API testing
 - Install dependencies
 
   ```
-  pip freeze > requirements.txt
+  pip install -r requirements.txt
   ```
 
 -   in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
@@ -21,16 +21,14 @@ Tavern test examples. Might be helpful if you just started to learn  API testing
 
 **If you start your own project  and use PyCharm:**
 
-- create new project [using PyCharm] 
+- create new project
 
-- set up virtualenvironment [using PyCharm] 
+- set up virtualenvironment 
 
--   install pytest via PyCharm]
--   install tavern [via PyCharm]
--   install colorlog [via PyCharm]
+-   install pytes
+-   install tavern 
+-   install colorlog 
 
--   in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
--   make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
 
 
 
@@ -40,7 +38,7 @@ Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/ba
 
 
 
-# Project structure
+# Project structure example
 
 ```
 .
@@ -75,28 +73,32 @@ Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/ba
 
 
 
+# Some common mistakes to avoid
+
+Of course you can read the docs, bu I decided to share some of my mistakes. Chances are you have the same problem which can be fixed quite quickly if you know where to look at.
+
 # Adding folder to PYTHONPATH
 
-To make sure that Tavern can find **external functions** you need to make sure that it is in the Python path. For example, if **utils.py** is in the ‘tests’ folder:
+To make sure that Tavern can find **external functions** you need to make sure that it is in the Python path. I had some issues with adding my test dir to PYTHONPATH. Seems like in different environments command may vary.  This is what works / does not work for me (I use zsh). For example, if **utils.py** is in the ‘tests’ folder:
 
-**Incorrect:**
+**Not worked:**
 
-```
- PYTHONPATH=$PYTHONPATH:/tests pytest tests/test_basics.tavern.yaml -q -k ex04
+```sh
+ PYTHONPATH=$PYTHONPATH:/tests pytest tests/test_basics.tavern.yaml -k ex04
  ...
  E   tavern.util.exceptions.InvalidExtFunctionError: Error importing module utils
  
 ```
 
-```
-PYTHONPATH=$PYTHONPATH:tests pytest tests/test_basics.tavern.yaml -q -k ex04
+```sh
+PYTHONPATH=$PYTHONPATH:tests pytest tests/test_basics.tavern.yaml -k ex04
  ...
 zsh: bad substitution
 ```
 
 
 
-**Correct:**
+**Worked**:
 
 ```
  PYTHONPATH=$PYTHONPATH:./tests pytest tests/test_basics.tavern.yaml -q -k ex04
@@ -104,7 +106,7 @@ zsh: bad substitution
 
 
 
-You can modify  ~/.bash_profile  to add absolute path to your PYTHONPATH. For Example:
+You can modify  ~/.bash_profile  to add absolute path to your PYTHONPATH so you do not need to include PYTHONPATH in command each time (note, this might affect other projects, so just comment it out when you do not need it) . For Example:
 
 ```
 export PYTHONPATH="$PYTHONPATH:/Users/maksim/repos/tau-tools-demo/py-tavern-api/tests"
@@ -150,14 +152,20 @@ id: "{user_id}"
 
 # Printing entire response using logging
 
-**Add this hook**
+Add this hook to your contest.py file to be able to see response even if it retured not in json format:
 
 ```python
 #conftest.py
 
 def pytest_tavern_beta_after_every_response(expected, response):
-    logging.info(f"================= GOT RESPONSE ================== \n\n{dumps(response.json(), indent=4)}")
-    pass
+    try:
+        logging.info(f"================= RESPONSE ================== "
+                     f"\n\nstatus code [{response.status_code}]\n{dumps(response.json(), indent=4)}\n\n")
+
+    except ValueError as e:
+        logging.info(f"================= RESPONSE ================== "
+                     f"\n\nstatus code [{response.status_code}]\n{response.text,}\n\n")
+    return
 ```
 
 
@@ -177,6 +185,45 @@ log_cli = 1
 log_level = INFO
 log_cli_level = INFO
 ```
+
+
+
+Example of pytest.ini
+
+Here is what I have in my pytest.ini file
+
+```
+[pytest]
+tavern-global-cfg=
+    snippets/common_snippets.yaml
+    tests/common.yaml
+    tests/secrets.yaml
+    snippets/api_urls.yaml
+tavern-strict=json:off
+tavern-beta-new-traceback = True
+
+filterwarnings =
+    ignore::UserWarning
+    ignore::ImportWarning
+    ignore::ResourceWarning
+
+testpaths = ​tests​, snippets
+addopts =
+    --doctest-modules
+    -r xs
+    -p no:warnings
+    -vv
+    --tb=short
+
+
+log_cli = 1
+log_level = INFO
+log_cli_level = INFO
+log_cli_format = %(asctime)s %(levelname)s %(message)s
+log_cli_date_format = %H:%M:%S
+```
+
+
 
 # List of Public APIs for Testing
 
