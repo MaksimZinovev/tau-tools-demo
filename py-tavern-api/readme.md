@@ -34,9 +34,15 @@ Some examples of Tavern tests:
 
 
 
-# Tavern Docs
+# Tavern Docs and useful links 
 
-Feel free to read Tavern Documentation [Link](https://tavern.readthedocs.io/en/latest/basics.html).  It is well written and has plenty of examples.
+Feel free to read [Tavern Documentation](https://tavern.readthedocs.io/en/latest/index.html). It is well written and has plenty of examples. 
+
+There are not many articles and tutorials   on how to use Tavern. Here are  a few  links that I found:
+
+- https://www.ontestautomation.com/writing-api-tests-in-python-with-tavern/
+- https://medium.com/@ali.muhammadimran/rest-api-test-automation-using-python-with-tavern-ci-part-1-707026eae702
+- https://apagiaro.it/tavern-test-api/
 
 
 
@@ -60,7 +66,7 @@ Feel free to read Tavern Documentation [Link](https://tavern.readthedocs.io/en/l
 
 - make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
 
-
+- edit conftest.py and replace my API keys with yours:
 
 I used  dotenv to inject my API keys in tests, so you will need to disable this section in  conftest.py: 
 
@@ -102,21 +108,11 @@ stages:
 
 - create new project
 - set up virtualenvironment
-- install pytest
 - install tavern
 - install colorlog
 - in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
-- make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
-
-# Tavern Docs and useful links 
-
-Feel free to read [Tavern Documentation](https://tavern.readthedocs.io/en/latest/index.html). It is well written and has plenty of examples. 
-
-There are not many articles and tutorials   on how to use Tavern. Here are  a few  links that I found:
-
-- https://www.ontestautomation.com/writing-api-tests-in-python-with-tavern/
-- https://medium.com/@ali.muhammadimran/rest-api-test-automation-using-python-with-tavern-ci-part-1-707026eae702
-- https://apagiaro.it/tavern-test-api/
+- make sure your  yaml tests are  names use the folowing pattern `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+- feel free to use my  contest.py and pytest.ini to make test output friendlier. 
 
 
 
