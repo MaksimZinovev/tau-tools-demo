@@ -1,40 +1,122 @@
-# About
-
-Tavern test examples. Might be helpful if you just started to learn  API testing using Python and Tavern. All tests use free public APIs. 
-
-# Getting Started
-
-**If you use PyCharm:**
-
-- clone repo
-
-- Install dependencies
-
-  ```
-  pip install -r requirements.txt
-  ```
-
--   in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
--   make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+![](tavern_header.png)
 
 
 
-**If you start your own project  and use PyCharm:**
+# Tavern Test Examples
 
-- create new project
+> "Tavern is a **pytest** plugin, command-line tool and **Python** library for automated **testing of APIs**, with a simple, concise and flexible YAML-based syntax" (https://taverntesting.github.io/)
 
-- set up virtualenvironment 
+This repo contains 30+ simple  Tavern test examples. Might be helpful if you just started to learn  API testing using Python and Tavern. I used  free public APIs to go through Tavern documentation and learn how to use it:
 
--   install pytes
--   install tavern 
--   install colorlog 
+- http://api.zippopotam.us/
 
+- https://jsonplaceholder.typicode.com
+
+- https://gorest.co.in/
+
+- http://www.recipepuppy.com
+
+- http://www.dropboxapi.com
+
+  
+
+Some examples of Tavern tests:
+
+-  Sending request and checking response status code, json response, headers
+-  Using external function to validate response
+
+- Using built-in Tavern schema validators
+- Test parametrization
+- Multi stage tests
+- Using external configuration files
+- Uploading file
+- Creating and reading resoures using APIs
 
 
 
 # Tavern Docs
 
-Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/basics.html)
+Feel free to read Tavern Documentation [Link](https://tavern.readthedocs.io/en/latest/basics.html).  It is well written and has plenty of examples.
+
+
+
+# Getting Started
+
+**If you clone this repo and  use PyCharm:**
+
+- clone repo
+
+- install dependancies
+
+  ``` pip install -r requirements.txt
+  pip install -r requirements.txt
+  ```
+
+- set up virtualenvironment 
+
+- install colorlog 
+
+- in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
+
+- make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+
+
+
+I used  dotenv to inject my API keys in tests, so you will need to disable this section in  conftest.py: 
+
+```
+# conftest.py
+# =========== disable this section and obtain your own API keys to run tests on your machine ================
+# =========== see comments in test_basics.tavern.yaml, test_http.tavern.yaml ================================
+try:
+    load_dotenv()
+    API_KEY_DROPBOX = os.getenv('API_KEY_DROPBOX')
+    API_KEY_GOREST = os.getenv('API_KEY_GOREST')
+except Exception as e:
+    logging.info(f'disable try-except section at the top of conftest.py and obtain your own API keys to run tests '
+                 f'on your machine: {e}')
+
+# =====================================================================================================
+```
+
+Then replace  variable with your API_KEY, example:
+
+```
+
+stages:
+  - name: Authenticate and add new random user
+    request:
+      url: https://gorest.co.in/public-api/users
+      method: POST
+      headers:
+        Content-Type: application/json
+        Authorization: "Bearer {tavern.env_vars.API_KEY_GOREST}"
+        #  replace above variable with your API_KEY, example:
+        #  Authorization: "Bearer 234dflkjdf967lkjdsf"
+        #  go to https://gorest.co.in/user/login.html to register free account
+```
+
+
+
+**If you start your own project and use PyCharm:**
+
+- create new project
+- set up virtualenvironment
+- install pytest
+- install tavern
+- install colorlog
+- in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
+- make sure your  yaml test is  called `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+
+# Tavern Docs and useful links 
+
+Feel free to read [Tavern Documentation](https://tavern.readthedocs.io/en/latest/index.html). It is well written and has plenty of examples. 
+
+There are not many articles and tutorials   on how to use Tavern. Here are  a few  links that I found:
+
+- https://www.ontestautomation.com/writing-api-tests-in-python-with-tavern/
+- https://medium.com/@ali.muhammadimran/rest-api-test-automation-using-python-with-tavern-ci-part-1-707026eae702
+- https://apagiaro.it/tavern-test-api/
 
 
 
@@ -46,11 +128,15 @@ Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/ba
 ├── __pycache__
 │   ├── conftest.cpython-38-pytest-5.4.1.pyc
 │   └── conftest.cpython-38-pytest-5.4.2.pyc
+├── accounts.yaml
 ├── conftest.py
 ├── logging.yaml
 ├── pytest.ini
 ├── readme.md
 ├── requirements.txt
+├── tavern-demo.gif
+├── test_data
+│   └── test_pdf.pdf
 ├── tests
 │   ├── __init__.py
 │   ├── __pycache__
@@ -69,6 +155,7 @@ Feel free to read Tavern Docs [Link](#https://tavern.readthedocs.io/en/latest/ba
 │   ├── lib
 │   └── pyvenv.cfg
 └── zip_code.yaml
+
 ```
 
 
@@ -114,6 +201,21 @@ export PYTHONPATH="$PYTHONPATH:/Users/maksim/repos/tau-tools-demo/py-tavern-api/
 # then run in shell or in PyCharm terminal:
 source ~/.bashprofile
 
+```
+
+# Some tips found in GitHub.../tavern/issues and Tavern documentation
+
+**Handling  "/" and curly braces "{"**:
+
+```yaml
+marks:
+  - bugdemo
+  - parametrize:
+      key: [line, text]
+      vals:
+        # NOTE: "\" requires doubling, !raw will take care of "{" and "}"
+        - [1, "XYZ[\\]^_`abcdefghijk"]
+        - [2, !raw "lmnopqrstuvwxyz{|}~*"]
 ```
 
 
@@ -225,21 +327,7 @@ log_cli_date_format = %H:%M:%S
 
 
 
-# List of Public APIs for Testing
 
--  https://reqres.in/
-
-- http://api.zippopotam.us/
-
-- https://jsonplaceholder.typicode.com
-
-- https://gorest.co.in/
-
-- http://www.recipepuppy.com
-
-- https://www.dropbox.com/developers/documentation
-
-  
 
  
 

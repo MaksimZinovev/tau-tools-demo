@@ -50,7 +50,7 @@ def generate_response2():
     return Box(joke)
 
 
-def generate_req3():
+def generate_req_rand():
     rint = str(randint(0,1000))
     req = {
         "first_name": "Max",
@@ -64,8 +64,7 @@ def generate_req3():
     return Box(req)
 
 
-def test_gen_func():
-    generate_req3()
+
 
 def log_response(response):
     # logging.info(f'\nJson response: {dumps(response.json(), indent=4)}')

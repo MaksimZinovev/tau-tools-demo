@@ -15,17 +15,9 @@ variables:
   res_rp: /api/
 
   host_zipo: api.zippopotam.us
+  api-arg: !raw '{"path": "/test_pdf.pdf", "mode": "add","autorename": true, "mute": false, "strict_conflict": false}'
+  # this is path in your Dropbox folder. In this case file  will be uploaded to the root folder
 
-# Dropbox
-# Can be found in
-#  https://www.dropbox.com/developers/apps > create app > Dropbox API > Full dropbox >
-#  > appname > create app >
-
-  app_token: F7qMlTV26XAAAAAAAAAALsvLaX31k-c6ean7HHK4hAsxloIZLGQxBiYR--Yxr3BD
-  api-arg: !raw '{"path": "/new/requirements.txt", "mode": "add","autorename": true, "mute": false, "strict_conflict": false}'
-
-#name: Adding new random user
-#description: Reusable test step for adding new random user.
 
 stages:
   - id: add_rand_user
@@ -35,10 +27,12 @@ stages:
       method: POST
       headers:
         Content-Type: application/json
-        Authorization: Bearer 0fVcl9o-ZPi5TbinICi7OU4fm_GJ_7q0O6ea
+        Authorization: "Bearer {tavern.env_vars.API_KEY_GOREST}"
+        #  replace above variable with your API_KEY
+        #  go to https://gorest.co.in/user/login.html to register free account
       json:
         $ext:
-          function: utils:generate_req3
+          function: utils:generate_req_rand
 
     response:
       status_code:
@@ -61,10 +55,12 @@ stages:
       method: PUT
       headers:
         Content-Type: application/json
-        Authorization: Bearer 0fVcl9o-ZPi5TbinICi7OU4fm_GJ_7q0O6ea
+        Authorization: "Bearer {tavern.env_vars.API_KEY_GOREST}"
+        #  replace above variable with your API_KEY
+        #  go to https://gorest.co.in/user/login.html to register free account
       json:
         $ext:
-          function: utils:generate_req3
+          function: utils:generate_req_rand
 
     response:
       status_code:
@@ -87,14 +83,15 @@ stages:
       method: DELETE
       headers:
         Content-Type: application/json
-        Authorization: Bearer 0fVcl9o-ZPi5TbinICi7OU4fm_GJ_7q0O6ea
+        Authorization: "Bearer {tavern.env_vars.API_KEY_GOREST}"
+        #  replace above variable with your API_KEY
+        #  go to https://gorest.co.in/user/login.html to register free account
 
     response:
       status_code: 200
-      verify_response_with:
-        function: utils:log_response
 
       json:
         _meta:
           code: 204
           message: "The request was handled successfully and the response contains no body content."
+

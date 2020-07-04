@@ -1,16 +1,27 @@
 # import logging.config
 from logging import config
 import os
-
-import pytest
+import html
 import yaml
 
-import requests
 import pytest
 import logging
 from random import randint
 from box import Box
 from json import dumps
+from dotenv import load_dotenv
+
+# =========== disable this section and obtain your own API keys to run tests on your machine ========
+# =========== see comments in test_basics.tavern.yaml, test_http.tavern.yaml ================================
+try:
+    load_dotenv()
+    API_KEY_DROPBOX = os.getenv('API_KEY_DROPBOX')
+    API_KEY_GOREST = os.getenv('API_KEY_GOREST')
+except Exception as e:
+    logging.info(f'Disable try-except section at the top of conftest.py and obtain your own API keys to run tests '
+                 f'on your machine: \n {e}')
+
+# =====================================================================================================
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -34,10 +45,16 @@ def zipcode():
 
 
 def pytest_tavern_beta_after_every_response(expected, response):
-    # logging.info(f"================= GOT RESPONSE ================== \n\n{dumps(response.json(), indent=4)}")
-    pass
+    try:
+        logging.info(f"================= RESPONSE ================== "
+                     f"\n\nstatus code [{response.status_code}]\n{dumps(response.json(), indent=4)}\n\n")
 
-
-def myfunc(response):
-    response
+    except ValueError as e:
+        if "!DOCTYPE html" in response.text:
+            logging.info(f"================= RESPONSE ================== "
+                         f"\n\nstatus code [{response.status_code}]\n{html.unescape(response.text)}\n\n")
+        else:
+            logging.info(f"================= RESPONSE ================== "
+                        f"\n\nstatus code [{response.status_code}]\n{response.text,}\n\n")
     return
+
