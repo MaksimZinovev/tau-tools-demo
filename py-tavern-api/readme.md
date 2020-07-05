@@ -52,13 +52,15 @@ There are not many articles and tutorials   on how to use Tavern. Here are  a fe
 
 - clone repo
 
+- set up virtual environment 
+
 - install dependancies
 
-  ``` pip install -r requirements.txt
+  ``` bash
   pip install -r requirements.txt
   ```
 
-- set up virtualenvironment 
+  
 
 - install colorlog 
 
@@ -107,11 +109,11 @@ stages:
 **If you start your own project and use PyCharm:**
 
 - create new project
-- set up virtualenvironment
+- set up virtual environment
 - install tavern
 - install colorlog
 - in PyCharm set pytest as default test runner (preferences-tools-python integrated tools-testing-pytest-apply)
-- make sure your  yaml tests are  names use the folowing pattern `test_x.tavern.yaml`, where `x` should be a description of the contained tests
+- make sure your  yaml test file names use the folowing pattern `test_x.tavern.yaml`, where `x` should be a description of the contained tests
 - feel free to use my  contest.py and pytest.ini to make test output friendlier. 
 
 
@@ -158,9 +160,9 @@ stages:
 
 # Some common mistakes to avoid
 
-Of course you can read the docs, bu I decided to share some of my mistakes. Chances are you have the same problem which can be fixed quite quickly if you know where to look at.
+Of course you can read the docs, but I decided to share some of my mistakes. Chances are you have the same problem which can be fixed quite quickly if you know where to look at.
 
-# Adding folder to PYTHONPATH
+## Adding folder to PYTHONPATH
 
 To make sure that Tavern can find **external functions** you need to make sure that it is in the Python path. I had some issues with adding my test dir to PYTHONPATH. Seems like in different environments command may vary.  This is what works / does not work for me (I use zsh). For example, if **utils.py** is in the ‘tests’ folder:
 
@@ -199,7 +201,7 @@ source ~/.bashprofile
 
 ```
 
-# Some tips found in GitHub.../tavern/issues and Tavern documentation
+# Some tips found in GitHub .../tavern/issues and Tavern documentation
 
 **Handling  "/" and curly braces "{"**:
 
@@ -216,7 +218,7 @@ marks:
 
 
 
-# Including external files:
+## Including external files:
 
 Note : common.yaml  must include **only one document**
 
@@ -231,7 +233,7 @@ description: Some information for tests
 
 
 
-# Using saved vars
+## Using saved vars
 
 **Incorrect:**
 

@@ -1,6 +1,3 @@
-# template: pytest tests/test_basics.tavern.yaml -k ex04
-# API https://github.com/15Dkatz/official_joke_api
-# source https://www.ontestautomation.com/writing-api-tests-in-python-with-tavern/
 
 ---
 # Simple request and validate status code
