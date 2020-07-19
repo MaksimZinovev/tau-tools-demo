@@ -42,7 +42,7 @@ stages:
         _meta:
           message: "A resource was successfully created in response to a POST request. The Location header contains the URL pointing to the newly created resource."
         result:
-          id: !anystr
+           id: !anystr
       save:
         json:
           user_id: result.id

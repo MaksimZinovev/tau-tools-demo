@@ -12,6 +12,8 @@ stages:
       status_code: 200
 
 
+
+
 ---
 
 # Request variables
@@ -36,7 +38,7 @@ stages:
         title: "{tavern.request_vars.json.title}"
         body: "{tavern.request_vars.json.body}"
         userId: !int "{tavern.request_vars.json.userId}"
-        id: 101
+         id: 101
 
 ---
 # Environment variables
@@ -90,6 +92,7 @@ stages:
     request:
       url: https://jsonplaceholder.typicode.com/posts/1
       method: GET
+
 
     response:
       status_code: 200

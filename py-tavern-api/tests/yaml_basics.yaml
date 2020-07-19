@@ -18,6 +18,7 @@ martin:
     skill: Elite
 
 
+
 # Multiple-line strings can be written either as a 'literal block' (using |),
 # or a 'folded block' (using '>').
 literal_block: |
