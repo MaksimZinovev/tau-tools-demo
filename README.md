@@ -6,7 +6,13 @@ There are lots of free and premium tools for testers outhere. We cannot learn th
 
 # Contents
 
-- [Running Selenium web UI Tests on Remote Machine Using Jenkins and AWS EC2 Instance: Beginners Guide](https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-ec2-jenkins-selenium)
-- [Web UI Automated Testing Using SeleniumBase framework and Python](https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-seleniumbase)
-- [API Automated Testing using Tavern and Python. 30+ Test Examples](https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-tavern-api)
+- [py-ec2-jenkins-selenium](https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-ec2-jenkins-selenium): Running Selenium web UI Tests on Remote Machine Using Jenkins and AWS EC2 Instance: Beginners Guide.
+
+- [py-pylenium](https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-pylenium): Demo Web UI  tests created using Pylenium - awesome open source wrapper around the Selenium Webdriver Python API, which provides a more Pythonic interface.
+
+- [py-seleniumbase](https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-seleniumbase): Demo Web UI  tests created using open source SeleniumBase framework and Python.
+
+- [py-tavern-api]((https://github.com/MaksimZinovev/tau-tools-demo/tree/master/py-tavern-api)) Demo REST API tests with 30+ examples created using Tavern - open source pytest plugin.
+
+  
 
