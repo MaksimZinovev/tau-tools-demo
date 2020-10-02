@@ -1,0 +1,9 @@
+---
+
+name: API urls
+description: Some random public apis found on the Internet
+
+# Variables should just be a mapping of key: value pairs
+variables:
+  host_jph: gorest.co.in
+  host_zpm: api.zippopotam.us
