@@ -11,7 +11,7 @@ cffi==1.14.0
 chardet==3.0.4
 colorama==0.4.3
 coverage==5.1
-cryptography==2.9
+cryptography==3.2
 decorator==4.4.2
 entrypoints==0.3
 execnet==1.7.1
