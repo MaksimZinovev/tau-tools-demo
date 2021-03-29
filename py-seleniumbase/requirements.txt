@@ -39,7 +39,7 @@ pycodestyle==2.5.0
 pycparser==2.20
 pycryptodome==3.9.7
 pyflakes==2.1.1
-Pygments==2.6.1
+Pygments==2.7.4
 PyMySQL==0.9.3
 pyOpenSSL==19.1.0
 pyotp==2.3.0
