@@ -34,7 +34,7 @@ pluggy==0.13.1
 portalocker==1.7.0
 prompt-toolkit==3.0.5
 ptyprocess==0.6.0
-py==1.8.1
+py==1.10.0
 pycodestyle==2.5.0
 pycparser==2.20
 pycryptodome==3.9.7
