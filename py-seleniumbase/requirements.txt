@@ -61,5 +61,5 @@ sortedcontainers==2.1.0
 soupsieve==2.0
 tqdm==4.45.0
 traitlets==4.3.3
-urllib3==1.25.9
+urllib3==1.26.5
 wcwidth==0.1.9
