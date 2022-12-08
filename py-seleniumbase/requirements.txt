@@ -6,7 +6,7 @@ backcall==0.1.0
 beautifulsoup4==4.9.0
 boto==2.49.0
 brython==3.8.8
-certifi==2020.4.5.1
+certifi==2022.12.7
 cffi==1.14.0
 chardet==3.0.4
 colorama==0.4.3
